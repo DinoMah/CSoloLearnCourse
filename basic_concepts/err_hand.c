@@ -67,5 +67,34 @@ int main()
     else if (errno == ERANGE)
         fprintf(stderr, "%s\n", strerror(errno));
 
+    // IO related error functions
+    /*
+        feof(fp)     Devuelve un valor diferente de 0 si se alcanzo el final, de otro modo 0. feof inicializa EOF
+        ferror(fp)   Devuelve un valor diferente de 0 si hay un error, de otro modo 0.
+    */
+
+    FILE *fileptr;
+    int c;
+
+    errno = 0;
+
+    fileptr = fopen("myfile.txt", "r");
+    if (fileptr == NULL)
+    {
+        fprintf(stderr, "Error opening file. %s\n", strerror(errno));
+        exit(EXIT_FAILURE);
+    }
+
+    while ((c = getc(fileptr)) != EOF)
+        printf("%c", c);
+
+    if (ferror(fileptr))
+    {
+        printf("I/O error reading file.");
+        exit(EXIT_FAILURE);
+    }
+    else if(feof(fileptr))
+        printf("End of file reached.");
+
     return 0;
 }
