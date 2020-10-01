@@ -1,0 +1,7 @@
+this is a file
+for testing purposes
+it suposed to be filled
+with some lines
+for printing on console
+so it's expected to have
+some kind of text
